@@ -4,7 +4,11 @@
 
 ## 需求
 
-案例情境：公开仓库 `english-sentence-analyzer` 原属 `roadriver-tech` 组织，被源第二大脑（`roadriver-tech/roadriver-tech`，下称 A）以子模块引用在 `examples/` 下。组织结构调整后，仓库归属转移到 `quanttide-founder` 组织；引用关系同时交接：A 不再引用，改由目标第二大脑（创始人私有主仓，下称 B）在 `examples/` 下引用。约束有三：仓库保持公开；B 遵守既有 `.gitmodules` 约定；A、B 各自提交推送，互不混入对方变更。
+### 情境
+
+公开仓库 `english-sentence-analyzer` 原属 `roadriver-tech` 组织，被源第二大脑（`roadriver-tech/roadriver-tech`，下称 A）以子模块引用在 `examples/` 下。组织结构调整后，仓库归属转移到 `quanttide-founder` 组织；引用关系同时交接：A 不再引用，改由目标第二大脑（创始人私有主仓，下称 B）在 `examples/` 下引用。约束有三：仓库保持公开；B 遵守既有 `.gitmodules` 约定；A、B 各自提交推送，互不混入对方变更。
+
+### 难点
 
 难点有四：
 
@@ -48,6 +52,8 @@
 
 ## 规格
 
+### 自然语言描述
+
 实现为六阶段流水线，每阶段以状态断言收尾：
 
 1. 探测：读取 R 的归属与可见性，读取 B 的远端、工作树状态与 `.gitmodules` 约定；断言 B 工作树干净、约定已知；
@@ -56,6 +62,72 @@
 4. 源清理：在 A 中 `git rm` 子模块路径，移除 `git-config` 配置节，删除 `.git/modules` 下 gitdir；断言 `.gitmodules` 与配置中无该节、工作树无残留目录；
 5. 核对：对 A、B 各执行 `git submodule status` 与 `git status --short`；断言 A 只剩其余子模块、B 新条目存在、两边工作树干净；
 6. 提交推送：A、B 各一个原子提交并推送；远端领先时 fetch 后变基再推。
+
+### YAML 描述
+
+机器可读的规格表示，与实现脚本逐阶段对应：
+
+```yaml
+# 子模块跨第二大脑迁移：参数、阶段、命令与断言
+meta:
+  repo: english-sentence-analyzer              # 被迁移仓库，保持 public
+  source_org: roadriver-tech                   # O1
+  target_org: quanttide-founder                # O2
+  source_brain: ~/repos/source-second-brain    # A，本地 clone
+  target_brain: ~/repos/target-second-brain    # B，本地 clone
+  submodule_path: examples/english-sentence-analyzer
+
+steps:
+  - id: probe                          # 1 探测
+    action: 读取目标约定与工作树状态
+    commands:
+      - git -C {target_brain} status --porcelain
+      - cat {target_brain}/.gitmodules
+    assert:
+      - worktree(target_brain) = clean
+
+  - id: transfer                       # 2 转移
+    action: 组织间转移
+    commands:
+      - gh api -X POST repos/{source_org}/{repo}/transfer -f new_owner={target_org}
+    assert:                            # 响应体是转移前状态，必须重新查询
+      - owner(repo) = {target_org}
+      - visibility(repo) = public
+
+  - id: adopt                          # 3 目标接入
+    action: 目标第二大脑接入子模块
+    commands:
+      - git -C {target_brain} submodule add https://github.com/{target_org}/{repo}.git {submodule_path}
+    assert:
+      - submodule_status(target_brain) 包含 {submodule_path}@main
+
+  - id: detach                         # 4 源清理
+    action: 源第二大脑移除子模块
+    commands:
+      - git -C {source_brain} rm {submodule_path}
+      - git -C {source_brain} config --local --remove-section submodule.{submodule_path}
+      - rm -rf {source_brain}/.git/modules/{submodule_path}
+    assert:                            # 对应不变式 I3
+      - .gitmodules 无该节 ∧ git-config 无该节 ∧ gitdir 不存在 ∧ 工作树无残留
+
+  - id: verify                         # 5 核对
+    action: 不变式核对
+    commands:
+      - git -C {source_brain} submodule status
+      - git -C {target_brain} submodule status
+    assert:
+      - 不变量 I2、I4 成立
+
+  - id: publish                        # 6 提交推送
+    action: 每仓库一个原子提交并推送
+    commits:
+      - brain: source
+        message: "chore: 移除 {repo} 子模块（仓库已迁至 {target_org}）"
+      - brain: target
+        message: "feat: 接入 {repo} 子模块（自 {source_org} 迁入）"
+    assert:
+      - 不变量 I5 成立 ∧ 两仓库已推送
+```
 
 > 提示：gitdir 可能按仓库初次添加时的历史路径命名，与当前路径不一致；用 `git config --local --get-regexp '^submodule\.'` 配合 `ls .git/modules` 排查实际位置。
 
