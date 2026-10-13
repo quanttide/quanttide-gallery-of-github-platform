@@ -13,3 +13,4 @@
 ### 新增
 
 - 初始化案例集仓库。
+- 新增案例：[迁移子模块引用到另一个第二大脑](second-brain/transfer-submodule-to-another.md)。
