@@ -15,3 +15,4 @@
 - 初始化案例集仓库。
 - 新增案例：[迁移子模块引用到另一个第二大脑](second-brain/transfer-submodule-to-another.md)。
 - 新增案例：[初始化第二大脑的资产子模块](second-brain/init-submodule.md)。
+- 新增 [CONTRIBUTING.md](CONTRIBUTING.md)：贡献指南——入库边界（案例是公开材料，不写执行记录）、组织方式、案例结构、提交流程。
