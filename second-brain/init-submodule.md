@@ -176,5 +176,3 @@ git -C "$B" add .gitmodules "$MOUNT" README.md CHANGELOG.md
 git -C "$B" commit -m "feat: 注册报告子模块（$MOUNT → $REPO）"
 git -C "$B" push
 ```
-
-案例执行结果：在同一第二大脑上一次建成 lab、gallery、report 三类资产子模块。子仓根提交分别为 `quanttide-github-lab` `e3738e3`、`quanttide-gallery-of-github-platform` `487df3c`、`quanttide-report-of-github-platform` `1b0de4d`；父仓登记提交 `e050c53` / `4fb778e` / `1d8aadf`，不变式 I1 至 I6 全部核对通过。许可按仓分类：lab 是代码仓取 Apache 2.0，gallery 与 report 是文档仓取 CC BY 4.0。
