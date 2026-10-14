@@ -4,20 +4,33 @@
 
 ## README.md
 
+本类仓库现成的文本，直接采用：
+
 ```markdown
-# <仓库名>
+# quanttide-gallery-of-github-platform
 
-量潮<中文名>——<一句话定位：是什么、给谁看、与同域资产的分工>。
+量潮 GitHub 平台案例集 — GitHub 平台实践案例与成果展示。
 
-## 结构
+## 定位
 
-| 路径 | 仓库 | 说明 |
-| :-- | :-- | :-- |
-| `<挂载路径>` | [<仓库>](<url>) | <承担什么> |
+gallery 是案例的公开展示层：内容可能被公开访问，脱敏是入库的前置条件。
+
+与同域（`adapters/quanttide-github`）资产的分工：
+
+| 资产 | 承担 | 问题 |
+|---|---|---|
+| `data/context` | 驱动 | 现在带着什么上下文干活？ |
+| **gallery（本仓库）** | 展示 | 做过哪类事、教训是什么？ |
+
+## 概述
+
+本仓库用于维护量潮 GitHub 平台的实践案例，包括：
+
+- 待补充
 
 ## 许可
 
-[<许可>](LICENSE)
+[CC BY 4.0](LICENSE)
 ```
 
 ## AGENTS.md
@@ -86,18 +99,24 @@
 
 ## CHANGELOG.md
 
+本类仓库现成的文本，直接采用：
+
 ```markdown
 # CHANGELOG
 
 所有显著变更都将记录在此文件中。
 
-格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)，版本号遵循 [SemVer](https://semver.org/)。
+格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)。
+
+版本遵循语义化版本规范：0.0.x（探索期）→ 0.x.y（验证期）→ x.y.z（正式期）
+
+---
 
 ## [Unreleased]
 
-### Added
+### 新增
 
-- <新增>
+- <变更>
 ```
 
 ## .gitignore
@@ -125,7 +144,7 @@ Thumbs.db
 
 ## LICENSE
 
-采用标准全文：代码仓 [Apache 2.0](LICENSE)（首行 `Copyright <年份> QuantTide`），文档仓 [CC BY 4.0](LICENSE)。
+本仓现成 [LICENSE](LICENSE) 为标准 **CC BY 4.0** 全文（首行 `Attribution 4.0 International`）；代码仓用 **Apache 2.0** 全文（首行 `Copyright <年份> QuantTide`）。许可文本是标准件，不随仓库而改。
 
 ## ROADMAP.md
 
