@@ -17,7 +17,9 @@ gallery 是案例的公开展示层：内容可能被公开访问，脱敏是入
 
 本仓库用于维护量潮 GitHub 平台的实践案例，包括：
 
-- 待补充
+- [初始化第二大脑的资产子模块](./second-brain/init-submodule.md)：命名与坐标反推、云端建仓、挂载、图层提交
+- [迁移子模块引用到另一个第二大脑](./second-brain/transfer-submodule-to-another.md)：组织转移、引用交接、四处状态清理
+- [同步子模块到云端](./second-brain/sync-submodule.md)：整棵子模块树的清点、对齐推送、逐层收指针与对账
 
 ## 许可
 
