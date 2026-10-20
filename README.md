@@ -21,6 +21,7 @@ gallery 是案例的公开展示层：内容可能被公开访问，脱敏是入
 - [迁移子模块引用到另一个第二大脑](./second-brain/transfer-submodule-to-another.md)：组织转移、引用交接、四处状态清理
 - [同步子模块到云端](./second-brain/sync-submodule.md)：整棵子模块树的清点、对齐推送、逐层收指针与对账
 - [对齐文件系统命名](./second-brain/rename-files.md)：同名的职位与职务分流，改名连引用，跨仓库同步。
+- [从 default 到领域](./second-brain/default-to-domain.md)：某个 default 的内容迁入领域第二大脑——按资产定性质、按目标定落点、按体例重写、逐层收指针。
 
 ## 许可
 
