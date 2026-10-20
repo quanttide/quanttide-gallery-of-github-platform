@@ -15,13 +15,21 @@ gallery 是案例的公开展示层：内容可能被公开访问，脱敏是入
 
 ## 概述
 
-本仓库用于维护量潮 GitHub 平台的实践案例，包括：
+本仓库用于维护量潮 GitHub 平台的实践案例。各主题目录内按 Git 操作对象分两个子目录：
 
-- [初始化第二大脑的资产子模块](./second-brain/init-submodule.md)：命名与坐标反推、云端建仓、挂载、图层提交
-- [迁移子模块引用到另一个第二大脑](./second-brain/transfer-submodule-to-another.md)：组织转移、引用交接、四处状态清理
-- [同步子模块到云端](./second-brain/sync-submodule.md)：整棵子模块树的清点、对齐推送、逐层收指针与对账
-- [对齐文件系统命名](./second-brain/rename-files.md)：同名的职位与职务分流，改名连引用，跨仓库同步。
-- [从 default 到领域](./second-brain/default-to-domain.md)：某个 default 的内容迁入领域第二大脑——按资产定性质、按目标定落点、按体例重写、逐层收指针。
+- `submodule/`：操作子模块及其远端引用；
+- `files/`：操作仓库内的文件、命名与归属。
+
+### 子模块
+
+- [初始化第二大脑的资产子模块](./second-brain/submodule/init-submodule.md)：命名与坐标反推、云端建仓、挂载、图层提交
+- [迁移子模块引用到另一个第二大脑](./second-brain/submodule/transfer-submodule-to-another.md)：组织转移、引用交接、四处状态清理
+- [同步子模块到云端](./second-brain/submodule/sync-submodule.md)：整棵子模块树的清点、对齐推送、逐层收指针与对账
+
+### 文件
+
+- [从 default 到领域](./second-brain/files/default-to-domain.md)：某个 default 的内容迁入领域第二大脑——按资产定性质、按目标定落点、按体例重写、逐层收指针。
+- [对齐文件系统命名](./second-brain/files/rename-files.md)：同名的职位与职务分流，改名连引用，跨仓库同步。
 
 ## 许可
 
